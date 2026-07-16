@@ -53,6 +53,15 @@ h2{font-weight:900;font-size:clamp(38px,4.5vw,56px);line-height:.98;letter-spaci
 .hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;position:relative;}
 .hero h1{font-weight:900;font-size:clamp(44px,5.4vw,76px);line-height:.98;letter-spacing:-2px;text-transform:uppercase;}
 .hero h1 .r{color:var(--red);display:block;}
+.hero h1 .roll-box{height:1em;overflow:hidden;}
+.hero h1 .roll{display:block;animation:roll 12s infinite;}
+.hero h1 .roll span{display:block;height:1em;line-height:1;}
+@keyframes roll{
+  0%,30%{transform:translateY(0);}
+  33%,63%{transform:translateY(-1em);}
+  66%,96%{transform:translateY(-2em);}
+  100%{transform:translateY(-3em);}
+}
 .hero p{color:var(--dim);font-size:18px;max-width:44ch;margin-top:28px;}
 .hero .btns{margin-top:40px;}
 
