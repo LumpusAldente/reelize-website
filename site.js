@@ -129,6 +129,40 @@
     document.querySelectorAll('.reel[data-video]').forEach(attachVideo);
   }
 
+  /* Work-Seite: rotierendes Wort — Breite laeuft mit, damit kein Loch entsteht */
+  (function(){
+    var box = document.querySelector('.page-head .roll-box');
+    var roll = box && box.querySelector('.roll4');
+    if(!roll || roll.children.length < 2) return;
+    if(REDUCE_MOTION) return;
+    var words = roll.children, n = words.length, i = 0;
+    function measure(txt){
+      var m = document.createElement('span');
+      m.style.cssText = 'position:absolute;visibility:hidden;white-space:nowrap;';
+      m.textContent = txt;
+      box.parentNode.appendChild(m);
+      var w = m.offsetWidth; m.remove(); return w;
+    }
+    function setWidth(){ box.style.width = measure(words[i].textContent) + 'px'; }
+    box.style.transition = 'width .5s ease';
+    roll.style.transition = 'transform .5s ease';
+    if(document.fonts && document.fonts.ready){ document.fonts.ready.then(setWidth); } else { setWidth(); }
+    window.addEventListener('resize', setWidth);
+    setInterval(function(){
+      i++;
+      roll.style.transform = 'translateY(calc(-' + i + ' * .95em))';
+      setWidth();
+      if(i === n - 1){
+        setTimeout(function(){
+          roll.style.transition = 'none';
+          roll.style.transform = 'translateY(0)';
+          i = 0;
+          requestAnimationFrame(function(){ requestAnimationFrame(function(){ roll.style.transition = 'transform .5s ease'; }); });
+        }, 550);
+      }
+    }, 4000);
+  })();
+
   /* Case-Studies: beim Öffnen Videos der Case laden */
   document.querySelectorAll('details.case').forEach(function(d){
     d.addEventListener('toggle', function(){

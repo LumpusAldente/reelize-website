@@ -193,6 +193,16 @@ footer .socials a:hover{border-color:var(--red);color:#fff;}
 .page-head{padding:90px 0 60px;}
 .page-head h1{font-weight:900;font-size:clamp(48px,6vw,84px);line-height:.95;letter-spacing:-2px;text-transform:uppercase;}
 .page-head h1 em{color:var(--red);font-style:normal;}
+.page-head h1 .roll-box{display:inline-block;height:.95em;overflow:hidden;vertical-align:bottom;}
+.page-head h1 .roll4{display:block;}
+.page-head h1 .roll4 span{display:block;height:.95em;line-height:.95;}
+@keyframes roll4{
+  0%,22%{transform:translateY(0);}
+  25%,47%{transform:translateY(-1em);}
+  50%,72%{transform:translateY(-2em);}
+  75%,97%{transform:translateY(-3em);}
+  100%{transform:translateY(-4em);}
+}
 .page-head p{color:var(--dim);margin-top:24px;max-width:56ch;font-size:18px;}
 .case{border:1px solid var(--line);border-radius:20px;background:var(--panel);overflow:hidden;margin-bottom:18px;}
 .case summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:190px 1fr auto auto;gap:28px;align-items:center;padding:20px 28px 20px 20px;}

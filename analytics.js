@@ -61,7 +61,7 @@
     banner.innerHTML =
       '<div class="cc-txt">' +
         '<b>Cookies &amp; Tracking</b>' +
-        '<p>Wir nutzen Google Analytics, um zu verstehen, wie unsere Website genutzt wird — aber nur mit deiner Zustimmung. Ohne Zustimmung werden keine Tracking-Cookies gesetzt.</p>' +
+        '<p>Wir nutzen Google Analytics, um zu verstehen, wie unsere Website genutzt wird — aber nur mit deiner Zustimmung. Ohne Zustimmung werden keine Tracking-Cookies gesetzt. Details in der <a href="datenschutz.html">Datenschutzerklärung</a>.</p>' +
       '</div>' +
       '<div class="cc-btns">' +
         '<button type="button" class="btn primary cc-accept">Alle akzeptieren</button>' +
