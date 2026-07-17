@@ -223,13 +223,8 @@ footer .socials a:hover{border-color:var(--red);color:#fff;}
 .case[open] summary .ic::after{transform:translate(-50%,-50%) scaleY(0);}
 .case .body{padding:10px 28px 40px;}
 .case .banner{width:100%;border-radius:14px;display:block;}
-.case .cols{display:grid;grid-template-columns:1fr 1fr;gap:50px;margin-top:36px;align-items:start;}
-.case .xmark{position:relative;display:inline-block;}
-.case .xmark .xt{font-weight:900;text-transform:uppercase;font-size:clamp(38px,4.2vw,58px);line-height:1;letter-spacing:-1.5px;}
-.case .xmark .xt small{display:flex;align-items:center;gap:.42em;font-size:.66em;margin-left:1.7em;margin-top:.28em;}
-.case .xmark .xt small img.bx{width:1.3em;height:1.3em;object-fit:contain;flex:none;transform:rotate(-8deg);margin-top:-.45em;}
-.case .xmark .xt small img.rz{height:.8em;width:auto;display:block;}
-.case .cols p{color:var(--dim);font-size:16px;}
+.case .cols{margin-top:36px;}
+.case .cols p{color:var(--dim);font-size:16px;max-width:72ch;}
 .case .cols p + p{margin-top:14px;}
 .case .cols p b{color:#fff;}
 .case .creels{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px;}
