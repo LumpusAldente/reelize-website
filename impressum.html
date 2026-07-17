@@ -12,10 +12,12 @@
 </head>
 <body>
 
+<a class="skip-link" href="#main">Zum Inhalt springen</a>
+
 <nav class="nav" data-screen-label="Navigation">
   <a class="logo" href="index.html"><img src="assets/logo-2026.webp" alt="Reelize"></a>
-  <button class="burger" aria-label="Menü"><span></span><span></span><span></span></button>
-  <ul>
+  <button class="burger" aria-label="Menü" aria-expanded="false" aria-controls="nav-menu"><span></span><span></span><span></span></button>
+  <ul id="nav-menu">
     <li><a href="work.html">Work</a></li>
     <li><a href="index.html#services">Services</a></li>
     <li><a href="index.html#team">Team</a></li>
@@ -23,6 +25,8 @@
     <li><a class="cta" href="https://outlook.office365.com/owa/calendar/Reelize@vorsorger.at/bookings/" target="_blank" rel="noopener">Termin buchen</a></li>
   </ul>
 </nav>
+
+<main id="main">
 
 <div class="wrap legal-page" data-screen-label="Impressum">
   <h1>Impressum</h1>
@@ -37,6 +41,8 @@
   <p><b>Haftungsausschluss:</b> Trotz sorgfältiger inhaltlicher Kontrolle übernimmt der Webseitenbetreiber dieser Webseite keine Haftung für die Inhalte externer Links. Für den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich. Sollten Sie dennoch auf ausgehende Links aufmerksam werden, welche auf eine Webseite mit rechtswidriger Tätigkeit/Information verweisen, ersuchen wir um dementsprechenden Hinweis, um diese nach § 17 Abs. 2 ECG umgehend zu entfernen.<br>Die Urheberrechte Dritter werden vom Betreiber dieser Webseite mit größter Sorgfalt beachtet. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um einen entsprechenden Hinweis. Bei Bekanntwerden derartiger Rechtsverletzungen werden wir den betroffenen Inhalt umgehend entfernen.</p>
 </div>
 
+</main>
+
 <footer data-screen-label="Footer">
   <div class="fl">
     <img src="assets/logo-2026.webp" alt="Reelize">
@@ -47,9 +53,10 @@
     <a href="https://www.instagram.com/reelize.social/" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
     <a href="https://www.facebook.com/profile.php?id=61554269236883" target="_blank" rel="noopener" aria-label="Facebook">FB</a>
   </div>
-  <div class="legal mono"><a href="agb.html">AGB</a><a href="impressum.html">Impressum</a></div>
+  <div class="legal mono"><a href="agb.html">AGB</a><a href="impressum.html">Impressum</a><button type="button" class="cc-open" onclick="reelizeCookieSettings()">Cookie-Einstellungen</button></div>
 </footer>
 
+<script src="analytics.js"></script>
 <script src="site.js"></script>
 </body>
 </html>

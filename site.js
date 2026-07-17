@@ -6,7 +6,7 @@
   document.addEventListener('click', function(e){
     var burger = e.target.closest('.burger');
     var nav = document.querySelector('.nav ul');
-    if(burger && nav){ nav.classList.toggle('open'); return; }
+    if(burger && nav){ var open = nav.classList.toggle('open'); burger.setAttribute('aria-expanded', open ? 'true' : 'false'); return; }
     if(nav && nav.classList.contains('open') && e.target.closest('.nav ul a')){ nav.classList.remove('open'); }
   });
 
@@ -32,6 +32,7 @@
      zwischengespeichert. Beim naechsten Besuch erscheint dieses Standbild
      sofort, noch bevor das Video (neu) geladen ist. */
   var POSTER_CACHE_PREFIX = 'reelize_poster_v1:';
+  var REDUCE_MOTION = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function getCachedPoster(src){
     try { return localStorage.getItem(POSTER_CACHE_PREFIX + src); } catch(e){ return null; }
@@ -77,24 +78,26 @@
       /* graue -> farbige Uebergangsanimation, kurz zeitversetzt zum Video-Fade-in */
       setTimeout(function(){ slot.classList.add('color-in'); }, 120);
       var snd = document.createElement('button');
-      snd.className = 'snd'; snd.setAttribute('aria-label','Ton an/aus'); snd.textContent = '\u{1F507}';
+      snd.className = 'snd'; snd.setAttribute('aria-label','Ton einschalten'); snd.textContent = '\u{1F507}';
       snd.addEventListener('click', function(ev){
         ev.stopPropagation();
         v.muted = !v.muted;
         snd.textContent = v.muted ? '\u{1F507}' : '\u{1F50A}';
+        snd.setAttribute('aria-label', v.muted ? 'Ton einschalten' : 'Ton ausschalten');
       });
       slot.appendChild(snd);
 
       var pp = document.createElement('button');
-      pp.className = 'playpause'; pp.setAttribute('aria-label','Video pausieren/abspielen');
+      pp.className = 'playpause'; pp.setAttribute('aria-label','Video pausieren');
       slot.appendChild(pp);
       pp.addEventListener('click', function(ev){
         ev.stopPropagation();
         slot.dataset.userPaused = v.paused ? '' : '1';
         if(v.paused){ v.play().catch(function(){}); } else { v.pause(); }
       });
-      v.addEventListener('play', function(){ slot.classList.remove('is-paused'); });
-      v.addEventListener('pause', function(){ slot.classList.add('is-paused'); });
+      v.addEventListener('play', function(){ slot.classList.remove('is-paused'); pp.setAttribute('aria-label','Video pausieren'); });
+      v.addEventListener('pause', function(){ slot.classList.add('is-paused'); pp.setAttribute('aria-label','Video abspielen'); });
+      if(REDUCE_MOTION){ slot.dataset.userPaused = '1'; slot.classList.add('is-paused'); pp.setAttribute('aria-label','Video abspielen'); }
 
       playIfVisible(slot, v);
     });
