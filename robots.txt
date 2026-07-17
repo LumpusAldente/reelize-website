@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://reelize.social/sitemap.xml
+Sitemap: https://www.reelize.social/sitemap.xml
