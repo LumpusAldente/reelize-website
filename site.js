@@ -69,10 +69,12 @@
     var v = document.createElement('video');
     v.muted = true; v.loop = true; v.playsInline = true;
     v.setAttribute('muted',''); v.setAttribute('playsinline','');
-    v.preload = 'metadata';
+    v.preload = 'auto'; /* 'metadata' laedt auf iOS keine Frames -> loadeddata feuert nie */
     if(cached) v.poster = cached;
     v.src = src;
-    v.addEventListener('loadeddata', function(){
+    var revealed = false;
+    function reveal(){
+      if(revealed) return; revealed = true;
       slot.classList.add('has-video');
       capturePosterFrame(slot, v, src);
       /* graue -> farbige Uebergangsanimation, kurz zeitversetzt zum Video-Fade-in */
@@ -98,11 +100,14 @@
       v.addEventListener('play', function(){ slot.classList.remove('is-paused'); pp.setAttribute('aria-label','Video pausieren'); });
       v.addEventListener('pause', function(){ slot.classList.add('is-paused'); pp.setAttribute('aria-label','Video abspielen'); });
       if(REDUCE_MOTION){ slot.dataset.userPaused = '1'; slot.classList.add('is-paused'); pp.setAttribute('aria-label','Video abspielen'); }
-
-      playIfVisible(slot, v);
-    });
+    }
+    /* welches Event zuerst kommt, gewinnt (iOS feuert loadeddata oft nicht) */
+    v.addEventListener('loadeddata', reveal);
+    v.addEventListener('canplay', reveal);
+    v.addEventListener('playing', reveal);
     v.addEventListener('error', function(){ v.remove(); }); /* Datei fehlt -> Platzhalter bleibt */
     slot.appendChild(v);
+    playIfVisible(slot, v); /* sofort beobachten -> play() stoesst auf Mobile das Laden an */
   }
 
   var playObs = ('IntersectionObserver' in window) ? new IntersectionObserver(function(entries){
@@ -110,7 +115,9 @@
       var v = en.target.querySelector('video');
       if(!v) return;
       if(en.target.dataset.userPaused === '1') return; /* Nutzer hat pausiert -> Auto-Play/Pause nicht ueberschreiben */
-      if(en.isIntersecting){ v.play().catch(function(){}); } else { v.pause(); }
+      if(en.isIntersecting){
+        v.play().catch(function(){ /* Autoplay blockiert (z.B. iOS Stromsparmodus) -> Play-Button zeigen */ en.target.classList.add('is-paused'); });
+      } else { v.pause(); }
     });
   },{threshold:.35}) : null;
 
