@@ -110,17 +110,17 @@ h2{font-weight:900;font-size:clamp(38px,4.5vw,56px);line-height:.98;letter-spaci
 .rcell .meta span{font-family:var(--mono);font-size:10px;color:var(--mut);letter-spacing:1px;flex:none;}
 
 /* ---------- marquee ---------- */
-.marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;padding:26px 0;}
-.marquee .track{display:flex;gap:70px;white-space:nowrap;animation:mq 32s linear infinite;width:max-content;}
-.marquee span{font-weight:800;text-transform:uppercase;font-size:20px;letter-spacing:-.3px;color:#6E6960;}
-.marquee span i{font-style:normal;color:var(--red);margin-right:14px;font-weight:400;}
+.marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;padding:15px 0;}
+.marquee .track{display:flex;gap:64px;white-space:nowrap;animation:mq 40s linear infinite;width:max-content;will-change:transform;}
+.marquee span{display:flex;align-items:center;font-weight:800;text-transform:uppercase;font-size:21px;letter-spacing:-.3px;color:#57534B;}
+.marquee span i{font-style:normal;color:var(--red);margin-right:64px;font-weight:400;font-size:16px;line-height:1;}
 @media (prefers-reduced-motion: reduce){
   html{scroll-behavior:auto;}
   .marquee .track{animation:none;}
   .hero h1 .roll{animation:none;}
   .btn:hover{transform:none;}
 }
-@keyframes mq{to{transform:translateX(-50%);}}
+@keyframes mq{to{transform:translate3d(-50%,0,0);}}
 
 /* ---------- process: video + steps ---------- */
 .process{display:grid;grid-template-columns:380px 1fr;gap:64px;margin-top:56px;align-items:center;}
